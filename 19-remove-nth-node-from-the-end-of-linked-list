@@ -1,0 +1,23 @@
+class Solution():
+    def remove_nth_from_end(self, head:ListNode, n):
+        curr = head
+        if curr.next == None and n == 1:
+            return None
+ 
+        while n > 1:
+            curr = curr.next
+            n -= 1            
+        list_end = curr    
+        node_to_remove = head
+        prev = None
+        
+        while list_end.next:
+            list_end = list_end.next
+            prev = node_to_remove
+            node_to_remove = node_to_remove.next
+
+        if node_to_remove == head:
+            return head.next
+        else:
+            prev.next = node_to_remove.next
+            return head
