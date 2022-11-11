@@ -74,8 +74,6 @@ class MyLinkedList:
             return
         for i in range(index - 1):
             temp = temp.next
-            if temp is None:
-                break
         if temp is None or temp.next is None:
             return
         next = temp.next.next
