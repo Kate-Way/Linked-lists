@@ -10,26 +10,16 @@ class MyLinkedList:
     def __init__(self):
         self.head = None
 
-    def length(self):
-        if self.head == None:
-            return
-        curr = self.head
-        total = 0
-        while curr.next:
-            total += 1
-            curr = curr.next
-        return total
-
     def get(self, index: int) -> int:
         if self.head == None:
-            return - 1
-        if index > self.length():
-            return - 1
+            return -1
         count = 0
         curr = self.head
-        while count != index:
+        while curr and count != index:
             curr = curr.next
             count += 1
+            if curr == None:
+                return -1
         return curr.val
 
     def addAtHead(self, val: int) -> None:
@@ -50,16 +40,16 @@ class MyLinkedList:
         if index == 0:
             self.addAtHead(val)
             return
-        if self.length() == None:
-            return
-        if index > self.length():
-            self.addAtTail(val)
+        if self.head == None:
             return
         count = 0
         curr = self.head
-        while (count+1) != index:
+        while curr and (count+1) != index:
             curr = curr.next
             count += 1
+            if curr == None:
+                self.addAtTail(val)
+                return
         new_node = Node(val)
         next = curr.next
         curr.next = new_node
@@ -68,27 +58,32 @@ class MyLinkedList:
     def deleteAtIndex(self, index: int) -> None:
         if self.head == None:
             return
-        temp = self.head
-        if index == 0:
-            self.head = temp.next
-            return
-        for i in range(index - 1):
-            temp = temp.next
-        if temp is None or temp.next is None:
-            return
-        next = temp.next.next
-        temp.next = next
-
-
-    def display(self):
-        elems = []
         curr = self.head
-        if curr == None:
-            print(elems)
+        if index == 0:
+            self.head = curr.next
             return
-        elems.append(curr.val)
-        while curr.next:
+        count = 0
+        while curr and (count + 1) != index:
             curr = curr.next
-            elems.append(curr.val)
-        print(elems)
+            count += 1
+        if curr == None or curr.next == None:
+            return
+        next = curr.next.next
+        curr.next = next
+
+# helpful function for visualization of the algorithm
+
+#     def display(self):
+#         elems = []
+#         curr = self.head
+#         if curr == None:
+#             print(elems)
+#             return
+#         elems.append(curr.val)
+#         while curr.next:
+#             curr = curr.next
+#             elems.append(curr.val)
+#         print(elems)
+
+
 
