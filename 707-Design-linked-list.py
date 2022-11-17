@@ -42,9 +42,9 @@ class MyLinkedList:
             return
         if self.head == None:
             return
-        count = 0
+        count = 1
         curr = self.head
-        while curr and (count+1) != index:
+        while curr and count != index:
             curr = curr.next
             count += 1
             if curr == None:
@@ -62,8 +62,8 @@ class MyLinkedList:
         if index == 0:
             self.head = curr.next
             return
-        count = 0
-        while curr and (count + 1) != index:
+        count = 1
+        while curr and count != index:
             curr = curr.next
             count += 1
         if curr == None or curr.next == None:
